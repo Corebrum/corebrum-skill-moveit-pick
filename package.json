@@ -1,0 +1,85 @@
+{
+  "name": "@agenticros/moveit-pick",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "External ROS-node skill: MoveIt MoveGroup pick / manipulate via action.",
+  "keywords": ["agenticros", "moveit", "manipulation", "ros2", "arm"],
+  "homepage": "https://github.com/agenticros/agenticros-skill-moveit-pick#readme",
+  "bugs": {
+    "url": "https://github.com/agenticros/agenticros-skill-moveit-pick/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agenticros/agenticros-skill-moveit-pick.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "agenticros": {
+    "id": "moveit-pick",
+    "displayName": "MoveIt Pick",
+    "description": "Plan and execute a MoveIt pick via the MoveGroup action. Bring up MoveIt yourself; AgenticROS dispatches the action. Prefer an explicit goal matching your MoveIt setup.",
+    "categories": ["manipulation"],
+    "capabilities": [
+      {
+        "id": "pick_object",
+        "verb": "manipulate",
+        "description": "Plan and execute a MoveIt pick via the MoveGroup action.",
+        "inputs": {
+          "goal": {
+            "type": "object",
+            "description": "Explicit moveit_msgs/action/MoveGroup goal (recommended)."
+          },
+          "x": {
+            "type": "number",
+            "description": "Grasp pose x (m) — informational; pass goal for real MoveGroup requests.",
+            "optional": true
+          },
+          "y": {
+            "type": "number",
+            "description": "Grasp pose y (m).",
+            "optional": true
+          },
+          "z": {
+            "type": "number",
+            "description": "Grasp pose z (m).",
+            "optional": true
+          },
+          "frame_id": {
+            "type": "string",
+            "description": "Pose frame_id.",
+            "optional": true
+          }
+        },
+        "outputs": {
+          "success": {
+            "type": "boolean",
+            "description": "Whether the action reported success."
+          }
+        },
+        "interruptible": true,
+        "blocks_base": false,
+        "implementation": {
+          "kind": "external_ros_node",
+          "package": "moveit_ros_move_group",
+          "launch": "move_group.launch.py",
+          "action": "move_action",
+          "msg_type": "moveit_msgs/action/MoveGroup"
+        }
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "typescript": "^5.7.0"
+  },
+  "author": "AgenticROS",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  }
+}
