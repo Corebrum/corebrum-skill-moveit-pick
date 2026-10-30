@@ -1,13 +1,16 @@
 # MoveIt Pick — external manipulation skill
 
+This project was previously known as AgenticROS.
+
+
 Marketplace package for the `pick_object` capability (`external_ros_node` → MoveIt `MoveGroup`).
 
 ```bash
-npx agenticros skills install @agenticros/moveit-pick
+npx @corebrum/synapse skills install @corebrum/moveit-pick
 # or: chrismatthieu/moveit-pick
 ```
 
-AgenticROS does **not** launch MoveIt. Bring up your MoveIt2 / MoveGroup stack on the robot (or sim), then install this skill.
+Corebrum Synapse does **not** launch MoveIt. Bring up your MoveIt2 / MoveGroup stack on the robot (or sim), then install this skill.
 
 Until core adds a MoveGroup goal helper, pass an **explicit `goal`** object matching `moveit_msgs/action/MoveGroup` for your planning group and grasp pose.
 
@@ -49,5 +52,5 @@ Shape the `goal` to your MoveIt config (planning group, end-effector, grasp). Th
 | Item | Status |
 |------|--------|
 | Manifest / npm / marketplace | Shipped |
-| `agenticros up sim-arm` + MoveIt2 | WIP (joint jogging works; MoveGroup not in sim yet) |
+| `synapse up sim-arm` + MoveIt2 | WIP (joint jogging works; MoveGroup not in sim yet) |
 | CI demo | Not claimed |
